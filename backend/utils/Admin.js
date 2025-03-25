@@ -10,10 +10,11 @@ const existingAdmin = await userModel.findOne({email:adminEmail});
 
 if(!existingAdmin){
 const admin = new userModel({
-    fullname:"Super Admin",
+    fullName:"Super Admin",
     username:"superadmin",
     email:adminEmail,
     password:adminPassword,
+    phone:"031111111",
     role:"admin"
 });
 
