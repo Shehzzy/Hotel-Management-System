@@ -9,8 +9,11 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const authRouter = require("./Routes/auth-router");
+const roomRouter = require("./Routes/auth-router");
 
 app.use("/api/auth", authRouter);
+app.use("/api/room", roomRouter);
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);

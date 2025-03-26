@@ -8,13 +8,13 @@ const inactiveUserStatus = "inactive";
 //  USER REGISTRATION API - BY DEFAULT INACTIVE
 const register = async (req, res) => {
   try {
-    const { fullname, username, phone, email, password, role } = req.body;
+    const { fullName, username, phone, email, password, role } = req.body;
 
     const userExists = await userModel.findOne({ email: email });
     if (userExists) { return res.json({ message: "User already exists" }); }
 
     const newUser = await userModel.create({
-      fullname: fullname,
+      fullName: fullName,
       username: username,
       phone: phone,
       email: email,
@@ -80,7 +80,7 @@ const profileData = async (req, res) => {
     }
 
     var userData = {
-      fullname: findUser.fullName,
+      fullName: findUser.fullName,
       email: findUser.email,
       username: findUser.username,
       phone: findUser.phone,
