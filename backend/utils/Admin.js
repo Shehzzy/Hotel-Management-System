@@ -15,7 +15,8 @@ const admin = new userModel({
     email:adminEmail,
     password:adminPassword,
     phone:"031111111",
-    role:"admin"
+    role:"admin",
+    status:"active"
 });
 
 await admin.save();
