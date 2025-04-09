@@ -1,11 +1,4 @@
 const roomModel = require('../Models/RoomModel');
-const availableStatus = "available";
-const bookedStatus = "booked";
-const underMaintenenceStatus = "under maintenance";
-const cleaningStatus = "cleaning";
-
-
-
 // Room Creation API
 
 const createRoom = async (req, res) => {
@@ -102,13 +95,13 @@ const updateRoomStatus = async (req, res) => {
         const findRoom = await roomModel.findOne({ _id: req.params.roomId });
         if (!findRoom) { return res.status(404).json({ message: "No room found" }); }
         const currentRoomStatus = findRoom.roomStatus;
-        if(currentRoomStatus === status){
-            return res.status(404).json({message:`This room's status is ${currentRoomStatus}`});
+        if (currentRoomStatus === status) {
+            return res.status(404).json({ message: `This room's status is ${currentRoomStatus}` });
         }
 
-        if(currentRoomStatus !== status){
-            const updateStatus = await roomModel.findByIdAndUpdate(req.params.roomId, {roomStatus:status}, {new:true});
-            return res.status(200).json({message:`The room has been successfully ${status}`, updateStatus});
+        if (currentRoomStatus !== status) {
+            const updateStatus = await roomModel.findByIdAndUpdate(req.params.roomId, { roomStatus: status }, { new: true });
+            return res.status(200).json({ message: `The room has been successfully ${status}`, updateStatus });
         }
     } catch (error) {
         console.error("Server error", error);
