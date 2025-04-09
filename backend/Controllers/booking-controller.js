@@ -63,4 +63,4 @@ const updateBookingStatus = async (req, res) => {
     }
 }
 
-module.exports = { createBooking, getAllBookings };
+module.exports = { createBooking, getAllBookings, getSingleBookingDetails, updateBookingStatus };
