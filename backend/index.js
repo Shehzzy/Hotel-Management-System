@@ -10,9 +10,11 @@ app.use(cors());
 
 const authRouter = require("./Routes/auth-router");
 const roomRouter = require("./Routes/auth-router");
+const bookingRouter = require("./Routes/booking-router");
 
 app.use("/api/auth", authRouter);
 app.use("/api/room", roomRouter);
+app.use("/api/booking", bookingRouter);
 
 
 app.listen(process.env.PORT, () => {
