@@ -56,7 +56,14 @@ const getSingleBookingDetails = async (req, res) => {
 // Update booking status API
 const updateBookingStatus = async (req, res) => {
     try {
+        const bookingId = req.params.bookingId;
+        const findBooking = await bookingModel.findById(bookingId);
+        if (!findBooking) { return res.status(404).json({ message: "No booking found" }); }
+        const { bookingStatus } = req.body;
+        const findAbookingAndUpdate = await bookingModel.findByIdAndUpdate(bookingId, { bookingStatus: bookingStatus }, {new: true});
+        if (!findAbookingAndUpdate) { return res.status(404).json({ message: "An error while updating the status" }); }
 
+        return res.status(200).json({ message: "Status has been updated", findAbookingAndUpdate });
     } catch (error) {
         console.error("Server error", error);
         return res.status(400).json({ message: "Server error", error });

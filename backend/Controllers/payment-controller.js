@@ -36,7 +36,7 @@ const getSinglePayment = async (req, res) => {
         const findPayment = await paymentModel.findById(req.params.paymentId);
         if (!findPayment) { return res.status(404).json({ message: "No payment found" }); }
 
-        return res.status(200).json({message:"Here is the requested payment details", findPayment});
+        return res.status(200).json({ message: "Here is the requested payment details", findPayment });
 
     } catch (error) {
         console.error("Internal server error", error);
@@ -45,6 +45,24 @@ const getSinglePayment = async (req, res) => {
 }
 
 // UPDATE PAYMENT STATUS API
-const updatePaymentStatus = async (req,res) =    {
+const updatePaymentStatus = async (req, res) => {
+    try {
 
+        const paymentId = req.params.paymentId;
+        const findPayment = await paymentModel.findById(paymentId);
+        if (!findPayment) { return res.status(404).json({ message: "No payment found" }); }
+
+        const { paymentStatus } = req.body;
+
+        const findPaymentToUpdate = await paymentModel.findByIdAndUpdate(paymentId, { status: paymentStatus }, { new: true });
+
+        if (!findPaymentToUpdate) { return res.status(404).json({ message: "Error while updating the status", findPaymentToUpdate }); }
+
+        return res.status(200).json({message:"Successfully updated the payment status", findPaymentToUpdate});
+    } catch (error) {
+        console.error("Internal server error", error);
+        return res.status(404).json({message:"Internal server error"});
+    }
 }
+
+module.exports = { processPayment, getAllPayments, getSinglePayment, updatePaymentStatus };

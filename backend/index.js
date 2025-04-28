@@ -11,11 +11,12 @@ app.use(cors());
 const authRouter = require("./Routes/auth-router");
 const roomRouter = require("./Routes/auth-router");
 const bookingRouter = require("./Routes/booking-router");
+const paymentRouter = require("./Routes/payment-router");
 
 app.use("/api/auth", authRouter);
-app.use("/api/room", roomRouter);
+app.use("/api/room", roomRouter); 
 app.use("/api/booking", bookingRouter);
-
+app.use("/api/payment", paymentRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);
